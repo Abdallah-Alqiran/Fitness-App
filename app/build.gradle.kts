@@ -80,6 +80,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
 
+    // For Testing
+    testImplementation(libs.truth)
+    androidTestImplementation(libs.truth)
+
     //coil
     implementation(libs.coil)
     implementation(libs.coil.compose)

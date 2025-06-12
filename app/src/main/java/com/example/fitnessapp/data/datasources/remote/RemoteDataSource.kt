@@ -35,7 +35,7 @@ class RemoteDataSource @Inject constructor(
                 .get(Source.CACHE)
                 .await()
             if (!cacheSnapshot.isEmpty) {
-                cacheSnapshot.map { it.toObject(Muscles::class.java) }
+                return cacheSnapshot.map { it.toObject(Muscles::class.java) }
             }
 
             val snapshot = firestore.collection("Muscles")

@@ -31,8 +31,7 @@ fun ProfileTopBar(onEditProfile: () -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 15.dp)
-                    ,
+                    .padding(all = 15.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(

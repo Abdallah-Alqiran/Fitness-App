@@ -18,6 +18,7 @@ class SignUpViewModel @Inject constructor(
 
     private val _state = MutableStateFlow<SignUpState>(SignUpState.UnAuthenticated)
     val state = _state.asStateFlow()
+
     // for invalid inputs
     private val _invalidElements = MutableStateFlow<Map<String, String>>(emptyMap())
     val invalidElements = _invalidElements.asStateFlow()
@@ -33,19 +34,7 @@ class SignUpViewModel @Inject constructor(
     val password = _password.asStateFlow()
 
     fun createUser() {
-        val errors = mutableMapOf<String, String>()
-
-        if (!_userName.value.matches("^[a-zA-Z0-9._]{3,20}$".toRegex())) {
-            errors["userName"] = "Username cannot be empty"
-        }
-
-        if (!_email.value.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}\$".toRegex())) {
-            errors["email"] = "Invalid email format"
-        }
-
-        if (_password.value.length < 6) {
-            errors["password"] = "Password must be at least 6 characters"
-        }
+        val errors = registrationUtil(_userName.value, _email.value, _password.value)
 
         if (errors.isEmpty()) {
             _invalidElements.value = emptyMap()
@@ -55,7 +44,12 @@ class SignUpViewModel @Inject constructor(
 
                 try {
                     firebaseRepository.createUserEmailAndPassword(_email.value, _password.value)
-                    firebaseRepository.saveUserData(mapOf("email" to _email.value, "userName" to _userName.value))
+                    firebaseRepository.saveUserData(
+                        mapOf(
+                            "email" to _email.value,
+                            "userName" to _userName.value
+                        )
+                    )
 
                     _state.value = SignUpState.Authenticated
                     Log.d("Al-qiran", "From block")
@@ -64,8 +58,10 @@ class SignUpViewModel @Inject constructor(
                     _state.value = SignUpState.Error(e.message.toString())
                     if (e is java.net.UnknownHostException ||
                         e is java.net.SocketTimeoutException ||
-                        e is java.io.IOException) {
-                        _state.value = SignUpState.Error("Network error. Please check your internet connection.")
+                        e is java.io.IOException
+                    ) {
+                        _state.value =
+                            SignUpState.Error("Network error. Please check your internet connection.")
 
                     } else {
                         _state.value = SignUpState.Error("Invalid email or password.")
@@ -90,4 +86,34 @@ class SignUpViewModel @Inject constructor(
         _password.value = password
     }
 
+}
+
+fun registrationUtil(
+    userName: String,
+    email: String,
+    password: String
+): MutableMap<String, String> {
+    val errors = mutableMapOf<String, String>()
+
+    if (userName.isEmpty()) {
+        errors["userName"] = "Username cannot be empty"
+    } else if (!userName.matches("^[a-zA-Z0-9._ ]{3,20}$".toRegex()) || userName.first()
+            .isDigit()
+    ) {
+        errors["userName"] = "Invalid UserName Format"
+    }
+
+    if (email.isEmpty()) {
+        errors["email"] = "Email can't be empty"
+    } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}\$".toRegex())) {
+        errors["email"] = "Invalid email format"
+    }
+
+    if (password.isEmpty()) {
+        errors["password"] = "Password can't be empty"
+    } else if (password.length < 6) {
+        errors["password"] = "Password must be at least 6 characters"
+    }
+
+    return errors
 }
