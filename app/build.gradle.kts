@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.runtime.android)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -83,6 +84,28 @@ dependencies {
     // For Testing
     testImplementation(libs.truth)
     androidTestImplementation(libs.truth)
+
+    // testing
+    testImplementation(kotlin("test"))
+
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+
+    // Mockito (Java mocking framework)
+    testImplementation("org.mockito:mockito-core:5.3.1")
+
+    // Kotlinx Coroutines testing
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+
+
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+
 
     //coil
     implementation(libs.coil)

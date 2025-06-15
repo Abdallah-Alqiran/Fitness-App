@@ -34,6 +34,7 @@ runtimeAndroid = "1.8.1"
 truth = "1.4.4"
 ui = "1.5.0"
 workRuntimeKtx = "2.10.0"
+junitJupiter = "5.8.1"
 
 [libraries]
 androidx-connect-client = { module = "androidx.health.connect:connect-client", version.ref = "connectClient" }
@@ -86,6 +87,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeVersion" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
