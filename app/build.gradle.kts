@@ -21,7 +21,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.fitnessapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -106,6 +106,8 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
 
+    // testing hilt
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.56.2")
 
     //coil
     implementation(libs.coil)
