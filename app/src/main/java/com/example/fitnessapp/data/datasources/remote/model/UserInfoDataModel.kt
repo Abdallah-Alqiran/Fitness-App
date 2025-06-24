@@ -1,12 +1,12 @@
 package com.example.fitnessapp.data.datasources.remote.model
 
 data class UserInfoDataModel(
-    val email: String = "",
-    val gender: String = "",
-    val goal: String = "",
-    val height: String = "",
-    val level: String = "",
-    val userName: String = "",
-    val age: String = "",
+    val email: String = "NOT Specified",
+    val gender: String = "NOT Specified",
+    val goal: String = "NOT Specified",
+    val height: String = "NOT Specified",
+    val level: String = "NOT Specified",
+    val userName: String = "NOT Specified",
+    val age: String = "NOT Specified",
     val weight: Int = 0,
 )

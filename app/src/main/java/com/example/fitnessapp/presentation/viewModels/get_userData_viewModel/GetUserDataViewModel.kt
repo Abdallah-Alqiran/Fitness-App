@@ -26,7 +26,7 @@ class GetUserDataViewModel @Inject constructor(
         _getUserDataState.value = GetUserDataState.Loading
         viewModelScope.launch {
             try {
-                val result = firebaseRepository.getUserData()!!.toUserInfoUiModel()
+                val result = firebaseRepository.getUserData().toUserInfoUiModel()
                 _getUserDataState.value = GetUserDataState.Success(result)
             } catch(e: Exception) {
                 _getUserDataState.value = GetUserDataState.Error(e.message.toString())

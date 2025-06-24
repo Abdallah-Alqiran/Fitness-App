@@ -1,10 +1,7 @@
 package com.example.fitnessapp.di
 
-import com.example.fitnessapp.data.datasources.remote.repository.RemoteRepoImpl
-import com.example.fitnessapp.domain.repo.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
